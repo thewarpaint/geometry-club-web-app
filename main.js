@@ -55,5 +55,5 @@ captureSnapshotButton.onclick = function () {
   canvas.getContext('2d').
     drawImage(video, 0, 0, canvas.width, canvas.height);
 
-  window.open(canvas.toDataURL(), 'image');
+  window.open(canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream'), 'image');
 };
