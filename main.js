@@ -3,7 +3,10 @@ var video = document.querySelector('video');
 var toggleCameraButton = document.querySelector('#toggle-camera-button');
 var captureSnapshotButton = document.querySelector('#capture-snapshot-button');
 var canvas = window.canvas = document.querySelector('canvas');
+var img = document.querySelector('img');
 var videoIndex = 0;
+var mediaStreamTrack;
+var imageCapture;
 
 canvas.width = 480;
 canvas.height = 360;
@@ -11,6 +14,14 @@ canvas.height = 360;
 function handleSuccess(stream) {
   window.stream = stream;
   video.srcObject = stream;
+
+  if (window.mediaStream) {
+    mediaStreamTrack = window.mediaStream.getVideoTracks()[0];
+    imageCapture = new ImageCapture(mediaStreamTrack);
+    console.log(imageCapture);
+  } else {
+    console.warn('Unfortunately window.mediaStream is not available.');
+  }
 }
 
 function handleError(error) {
@@ -56,4 +67,17 @@ captureSnapshotButton.onclick = function () {
     drawImage(video, 0, 0, canvas.width, canvas.height);
 
   window.open(canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream'), 'image');
+
+  if (imageCapture) {
+    imageCapture.takePhoto()
+      .then(function (blob) {
+        img.src = URL.createObjectURL(blob);
+        img.onload = function () {
+          URL.revokeObjectURL(this.src);
+        };
+      })
+      .catch(function (error) {
+        console.error('takePhoto() error:', error)
+      });
+  }
 };
