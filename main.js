@@ -15,13 +15,9 @@ function handleSuccess(stream) {
   window.stream = stream;
   video.srcObject = stream;
 
-  if (window.mediaStream) {
-    mediaStreamTrack = window.mediaStream.getVideoTracks()[0];
-    imageCapture = new ImageCapture(mediaStreamTrack);
-    console.log(imageCapture);
-  } else {
-    console.warn('Unfortunately window.mediaStream is not available.');
-  }
+  mediaStreamTrack = stream.getVideoTracks()[0];
+  imageCapture = new ImageCapture(mediaStreamTrack);
+  console.log(imageCapture);
 }
 
 function handleError(error) {
