@@ -57,13 +57,6 @@ toggleCameraButton.onclick = function () {
 };
 
 captureSnapshotButton.onclick = function () {
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  canvas.getContext('2d').
-    drawImage(video, 0, 0, canvas.width, canvas.height);
-
-  window.open(canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream'), 'image');
-
   if (imageCapture) {
     imageCapture.takePhoto()
       .then(function (blob) {
@@ -75,5 +68,12 @@ captureSnapshotButton.onclick = function () {
       .catch(function (error) {
         console.error('takePhoto() error:', error)
       });
+  } else {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').
+      drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    window.open(canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream'), 'image');
   }
 };
