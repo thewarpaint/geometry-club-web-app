@@ -8,6 +8,7 @@ var logger = document.querySelector('pre');
 var videoIndex = 0;
 var mediaStreamTrack;
 var imageCapture;
+var photoSettings;
 
 function handleSuccess(stream) {
   window.stream = stream;
@@ -17,6 +18,11 @@ function handleSuccess(stream) {
   imageCapture = new ImageCapture(mediaStreamTrack);
 
   imageCapture.getPhotoCapabilities().then(function (photoCapabilities) {
+    photoSettings = {
+      imageWidth: photoCapabilities.imageWidth.max,
+      imageHeight: photoCapabilities.imageHeight.max
+    };
+
     log('photoCapabilities: imageWidth.max = ' + photoCapabilities.imageWidth.max +
       ', imageHeight.max = ' + photoCapabilities.imageHeight.max);
   });
@@ -94,5 +100,5 @@ captureSnapshotButton.onclick = function () {
 
 function log(string) {
   console.log(string);
-  logger.innerHTML += string + '\n';
+  logger.innerHTML += '\n' + string;
 }
