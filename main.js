@@ -8,9 +8,6 @@ var videoIndex = 0;
 var mediaStreamTrack;
 var imageCapture;
 
-canvas.width = 480;
-canvas.height = 360;
-
 function handleSuccess(stream) {
   window.stream = stream;
   video.srcObject = stream;
@@ -18,6 +15,17 @@ function handleSuccess(stream) {
   mediaStreamTrack = stream.getVideoTracks()[0];
   imageCapture = new ImageCapture(mediaStreamTrack);
   console.log(imageCapture);
+
+  if (imageCapture) {
+    canvas.classList.add('hide');
+    img.classList.remove('hide');
+  } else {
+    canvas.classList.remove('hide');
+    img.classList.add('hide');
+
+    canvas.width = 480;
+    canvas.height = 360;
+  }
 }
 
 function handleError(error) {

@@ -16,3 +16,7 @@ video {
 button {
   font-size: 1rem;
 }
+
+.hide {
+  display: none !important;
+}
