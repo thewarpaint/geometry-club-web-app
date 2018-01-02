@@ -24,6 +24,7 @@ pre {
   color: #eeeeee;
   text-align: left;
   font-size: .75rem;
+  white-space: pre-wrap;
 }
 
 img {
