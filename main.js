@@ -77,7 +77,7 @@ toggleCameraButton.onclick = function () {
 
 captureSnapshotButton.onclick = function () {
   if (imageCapture) {
-    imageCapture.takePhoto()
+    imageCapture.takePhoto(photoSettings)
       .then(function (blob) {
         img.src = URL.createObjectURL(blob);
         img.onload = function () {
