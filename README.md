@@ -1,5 +1,13 @@
 # Geometry Club web app
 
+## Getting started
+
+Start a local HTTP server:
+
+```sh
+$ python -m SimpleHTTPServer
+```
+
 ## References
 
 - https://geometryclub.org/
