@@ -17,6 +17,12 @@ button {
   font-size: 1rem;
 }
 
+pre {
+  background-color: #000000;
+  color: #eeeeee;
+  text-align: left;
+}
+
 .hide {
   display: none !important;
 }

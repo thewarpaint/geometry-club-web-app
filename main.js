@@ -4,6 +4,7 @@ var toggleCameraButton = document.querySelector('#toggle-camera-button');
 var captureSnapshotButton = document.querySelector('#capture-snapshot-button');
 var canvas = window.canvas = document.querySelector('canvas');
 var img = document.querySelector('img');
+var logger = document.querySelector('pre');
 var videoIndex = 0;
 var mediaStreamTrack;
 var imageCapture;
@@ -14,7 +15,11 @@ function handleSuccess(stream) {
 
   mediaStreamTrack = stream.getVideoTracks()[0];
   imageCapture = new ImageCapture(mediaStreamTrack);
-  console.log(imageCapture);
+
+  imageCapture.getPhotoCapabilities().then(function (photoCapabilities) {
+    log('photoCapabilities: imageWidth.max = ' + photoCapabilities.imageWidth.max +
+      ', imageHeight.max = ' + photoCapabilities.imageHeight.max);
+  });
 
   if (imageCapture) {
     canvas.classList.add('hide');
@@ -70,7 +75,8 @@ captureSnapshotButton.onclick = function () {
       .then(function (blob) {
         img.src = URL.createObjectURL(blob);
         img.onload = function () {
-          URL.revokeObjectURL(this.src);
+        // Temporarily disabled to allow download
+        //   URL.revokeObjectURL(this.src);
         };
       })
       .catch(function (error) {
@@ -85,3 +91,8 @@ captureSnapshotButton.onclick = function () {
     window.open(canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream'), 'image');
   }
 };
+
+function log(string) {
+  console.log(string);
+  logger.innerHTML += string + '\n';
+}
