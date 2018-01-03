@@ -23,8 +23,8 @@ function handleSuccess(stream) {
       imageHeight: photoCapabilities.imageHeight.max
     };
 
-    log('photoCapabilities: imageWidth.max = ' + photoCapabilities.imageWidth.max +
-      ', imageHeight.max = ' + photoCapabilities.imageHeight.max);
+    log('Photo quality: ' + photoCapabilities.imageWidth.max + 'px × ' +
+      photoCapabilities.imageHeight.max + 'px');
   });
 
   if (imageCapture) {
@@ -103,5 +103,5 @@ captureSnapshotButton.onclick = function () {
 
 function log(string) {
   console.log(string);
-  logger.innerHTML += '\n' + string;
+  logger.innerHTML += '\n⇒ ' + string;
 }
