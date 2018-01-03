@@ -42,7 +42,7 @@ img {
 
 .video--overlay-guide {
   stroke: #ffffff;
-  stroke-width: 1px;
+  stroke-width: .125rem;
 }
 
 .hide {
