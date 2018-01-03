@@ -59,6 +59,7 @@ function startStream() {
     }
   };
 
+  log('Switching to device: ' + videoDevices[videoIndex].label);
   navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
 }
 
@@ -84,6 +85,8 @@ captureSnapshotButton.onclick = function () {
         // Temporarily disabled to allow download
         //   URL.revokeObjectURL(this.src);
         };
+
+        log('Photo captured successfully, size: ' + blob.size);
       })
       .catch(function (error) {
         console.error('takePhoto() error:', error)
