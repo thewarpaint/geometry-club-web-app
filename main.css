@@ -17,6 +17,7 @@ video {
 
 button {
   font-size: 1rem;
+  padding: .5rem;
 }
 
 pre {
@@ -37,6 +38,11 @@ img {
   top: 0;
   left: 0;
   opacity: .75;
+}
+
+.video--overlay-guide {
+  stroke: #ffffff;
+  stroke-width: 1px;
 }
 
 .hide {
