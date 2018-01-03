@@ -78,6 +78,8 @@ toggleCameraButton.onclick = function () {
 
 captureSnapshotButton.onclick = function () {
   if (imageCapture) {
+    toggleCaptureSnapshotButton(false);
+
     imageCapture.takePhoto(photoSettings)
       .then(function (blob) {
         img.src = URL.createObjectURL(blob);
@@ -90,6 +92,9 @@ captureSnapshotButton.onclick = function () {
       })
       .catch(function (error) {
         console.error('takePhoto() error:', error)
+      })
+      .finally(function () {
+        toggleCaptureSnapshotButton(true);
       });
   } else {
     canvas.width = video.videoWidth;
@@ -104,4 +109,10 @@ captureSnapshotButton.onclick = function () {
 function log(string) {
   console.log(string);
   logger.innerHTML += '\n⇒ ' + string;
+}
+
+function toggleCaptureSnapshotButton(enabled) {
+  captureSnapshotButton.disabled = !enabled;
+  captureSnapshotButton.classList.toggle('action-capture-snapshot--enabled', enabled);
+  captureSnapshotButton.classList.toggle('action-capture-snapshot--disabled', !enabled);
 }

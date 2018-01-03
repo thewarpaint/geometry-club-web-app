@@ -57,3 +57,13 @@ img {
   overflow: hidden;
   text-align: center;
 }
+
+.action-capture-snapshot--enabled .action-capture-snapshot__enabled-legend,
+.action-capture-snapshot--disabled .action-capture-snapshot__disabled-legend {
+  display: inline;
+}
+
+.action-capture-snapshot--enabled .action-capture-snapshot__disabled-legend,
+.action-capture-snapshot--disabled .action-capture-snapshot__enabled-legend {
+  display: none;
+}

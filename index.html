@@ -25,7 +25,10 @@
 
     <div>
       <button id="toggle-camera-button">Toggle camera</button>
-      <button id="capture-snapshot-button">Capture snapshot</button>
+      <button id="capture-snapshot-button" class="action-capture-snapshot action-capture-snapshot--enabled">
+        <span class="action-capture-snapshot__enabled-legend">Capture snapshot</span>
+        <span class="action-capture-snapshot__disabled-legend">Wait...</span>
+      </button>
     </div>
 
     <canvas></canvas>
