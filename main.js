@@ -79,14 +79,11 @@ toggleCameraButton.onclick = function () {
 captureSnapshotButton.onclick = function () {
   if (imageCapture) {
     toggleCaptureSnapshotButton(false);
+    revokePhotoURL();
 
     imageCapture.takePhoto(photoSettings)
       .then(function (blob) {
         img.src = URL.createObjectURL(blob);
-        img.onload = function () {
-        // Temporarily disabled to allow download
-        //   URL.revokeObjectURL(this.src);
-        };
 
         log('Photo captured successfully, size: ' + blob.size);
       })
@@ -115,4 +112,11 @@ function toggleCaptureSnapshotButton(enabled) {
   captureSnapshotButton.disabled = !enabled;
   captureSnapshotButton.classList.toggle('action-capture-snapshot--enabled', enabled);
   captureSnapshotButton.classList.toggle('action-capture-snapshot--disabled', !enabled);
+}
+
+function revokePhotoURL() {
+  if (img.src.indexOf('blob') !== -1) {
+    URL.revokeObjectURL(img.src);
+    log('Revoking URL: ' + img.src);
+  }
 }
