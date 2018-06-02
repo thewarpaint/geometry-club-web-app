@@ -14,7 +14,10 @@ function handleSuccess(stream) {
   window.stream = stream;
   video.srcObject = stream;
 
-  mediaStreamTrack = stream.getVideoTracks()[0];
+  mediaStreamTrack = stream.getVideoTracks().find(function (videoTrack) {
+    return videoTrack.label.indexOf('back') !== -1;
+  }) || stream.getVideoTracks()[0];
+
   imageCapture = new ImageCapture(mediaStreamTrack);
 
   imageCapture.getPhotoCapabilities().then(function (photoCapabilities) {
